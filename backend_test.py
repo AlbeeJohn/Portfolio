@@ -66,12 +66,13 @@ class PortfolioAPITester:
                     self.log_test("Portfolio Data Structure", False, f"Missing sections: {missing_sections}")
                     return
                 
-                # Verify personal info
+                # Verify personal info - Updated tagline
                 personal = data.get("personal", {})
-                if personal.get("tagline") == "Data Scientist & Analytics Professional":
-                    self.log_test("Portfolio Personal Info", True, "Correct tagline found")
+                expected_tagline = "Data Analysis & Science Enthusiast"
+                if personal.get("tagline") == expected_tagline:
+                    self.log_test("Portfolio Personal Info", True, f"Correct updated tagline found: {expected_tagline}")
                 else:
-                    self.log_test("Portfolio Personal Info", False, f"Incorrect tagline: {personal.get('tagline')}")
+                    self.log_test("Portfolio Personal Info", False, f"Incorrect tagline: {personal.get('tagline')}, expected: {expected_tagline}")
                 
                 # Verify skills include expected data science skills
                 skills = data.get("skills", {})
