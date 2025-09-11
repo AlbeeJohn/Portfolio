@@ -72,22 +72,28 @@ const Portfolio = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white relative">
-      <InteractiveBackground />
-      <FloatingElements />
-      <div className="relative z-10">
-        <Header />
-        <main>
-          <Hero data={data.personal} />
-          <About data={data.personal} />
-          <Skills data={data.skills} />
-          <Experience data={data.experience} />
-          <Projects data={data.projects} />
-          <Contact data={data.contact} />
-        </main>
-        <Footer />
+    <>
+      <SEOHead 
+        title={`${data.personal?.name || 'Albee John'} - ${data.personal?.tagline || 'Data Analysis & Science Enthusiast'} | Portfolio`}
+        description={`${data.personal?.description || 'Passionate about transforming raw data into actionable insights through advanced analytics, machine learning, and data-driven decision making.'} Located in ${data.personal?.location || 'Kollam, Kerala'}. Contact: ${data.personal?.email || 'albeejohnwwe@gmail.com'}`}
+      />
+      <div className="min-h-screen bg-gray-900 text-white relative">
+        <InteractiveBackground />
+        <FloatingElements />
+        <div className="relative z-10">
+          <Header />
+          <main role="main">
+            <Hero data={data.personal} />
+            <About data={data.personal} />
+            <Skills data={data.skills} />
+            <Experience data={data.experience} />
+            <Projects data={data.projects} />
+            <Contact data={data.contact} />
+          </main>
+          <Footer />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
