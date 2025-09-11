@@ -1,0 +1,29 @@
+# robots.txt for Albee John Portfolio
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://albeejohn.com/sitemap.xml
+
+# Disallow sensitive areas (none for portfolio site)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Crawl delay (optional)
+Crawl-delay: 1
+
+# Specific bot instructions
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
