@@ -7,7 +7,7 @@ PYTHON_VERSION = "3.11"
 NODE_VERSION = "20"
 
 [deploy]
-startCommand = "cd backend && uvicorn server:app --host 0.0.0.0 --port $PORT"
+startCommand = "cd backend && python -m uvicorn server:app --host 0.0.0.0 --port $PORT"
 healthcheckPath = "/api/health"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
@@ -15,3 +15,5 @@ restartPolicyMaxRetries = 10
 
 [env]
 PYTHONPATH = "/app/backend"
+PORT = "8000"
+ENVIRONMENT = "production"
