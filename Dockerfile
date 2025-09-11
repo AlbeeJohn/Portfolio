@@ -1,5 +1,5 @@
 # Multi-stage Docker build for production optimization
-FROM node:18-alpine AS frontend-builder
+FROM node:20-alpine AS frontend-builder
 
 # Set working directory
 WORKDIR /app/frontend
