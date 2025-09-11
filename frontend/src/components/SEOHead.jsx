@@ -90,7 +90,7 @@ const SEOHead = ({
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       <meta name="format-detection" content="telephone=no" />
-      <meta name="subject" content="Data Analysis & Science Enthusiast Portfolio" />
+      <meta name="subject" content="Data Analyst & Science Enthusiast Portfolio" />
       <meta name="rating" content="general" />
       <meta name="referrer" content="no-referrer-when-downgrade" />
       
