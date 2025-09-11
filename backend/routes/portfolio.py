@@ -10,14 +10,20 @@ router = APIRouter()
 logger = logging.getLogger(__name__)
 
 @router.get("/portfolio")
-async def get_portfolio(db = Depends(get_db)):
-    """Get complete portfolio data"""
+@cached_response(ttl=1800)  # Cache for 30 minutes
+@rate_limit()
+async def get_portfolio(request: Request, db = Depends(get_db)):
+    """Get complete portfolio data with caching"""
     try:
         portfolio = await db.portfolio.find_one({}, {"_id": 0})
         if not portfolio:
             raise HTTPException(status_code=404, detail="Portfolio not found")
+        logger.info("Portfolio data retrieved successfully")
         return portfolio
+    except HTTPException:
+        raise
     except Exception as e:
+        logger.error(f"Error retrieving portfolio: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.put("/portfolio")
