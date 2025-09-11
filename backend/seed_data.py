@@ -26,17 +26,17 @@ async def seed_portfolio_data():
     portfolio = Portfolio(
         personal=Personal(
             name="Albee John",
-            tagline="Data Scientist & Analytics Professional",
-            description="Passionate about transforming raw data into actionable insights through advanced analytics, machine learning, and data-driven decision making.",
+            tagline="Data Analyst & Science Enthusiast",
+            description="Passionate about transforming raw data into actionable insights through advanced analytics, data analysis, and data-driven decision making.",
             email="albeejohnwwe@gmail.com",
             phone="+91 8943785705",
             location="Kollam, Kerala",
-            bio="""I am an aspiring data scientist, fascinated with the expanse of data analytics and machine learning technologies. 
-            Currently pursuing expertise in Data Science and advanced analytics while building strong foundations in statistical analysis and predictive modeling.
+            bio="""I am an aspiring data analyst, fascinated with the expanse of data analytics and data science technologies. 
+            Currently pursuing expertise in Data Analysis and advanced analytics while building strong foundations in statistical analysis and data modeling.
             My journey spans from academic excellence to practical implementation, with experience in consulting and complex data analysis.
             
             I believe in the power of data to drive meaningful insights and strategic decision-making. My goal is to contribute 
-            to innovative data-driven projects that solve real-world problems through advanced analytics and machine learning applications.""",
+            to innovative data-driven projects that solve real-world problems through advanced analytics and data analysis applications.""",
             education=[
                 Education(
                     degree="B.Tech, Computer Science & Engineering",
