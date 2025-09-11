@@ -14,7 +14,7 @@ const SEOHead = ({
     "@type": "Person",
     "name": "Albee John",
     "jobTitle": "Data Analysis & Science Enthusiast",
-    "description": "Aspiring data scientist with expertise in Python, R, Machine Learning, and Statistical Analysis",
+    "description": "Passionate about transforming raw data into actionable insights through advanced analytics, machine learning, and data-driven decision making. Currently pursuing expertise in Data Science and advanced analytics.",
     "url": url,
     "image": image,
     "sameAs": [
