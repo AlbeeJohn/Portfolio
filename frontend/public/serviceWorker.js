@@ -1,104 +1,162 @@
-// Service Worker for Albee John Portfolio
-const CACHE_NAME = 'albee-john-portfolio-v1';
-const STATIC_CACHE = 'static-v1';
-const DYNAMIC_CACHE = 'dynamic-v1';
-
-// Assets to cache on install
+const CACHE_NAME = 'portfolio-v1.0.0';
 const urlsToCache = [
   '/',
   '/static/js/bundle.js',
   '/static/css/main.css',
-  '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap'
+  '/manifest.json'
 ];
 
-// Install event
-self.addEventListener('install', event => {
+// Install event - cache resources
+self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(STATIC_CACHE)
-      .then(cache => {
+    caches.open(CACHE_NAME)
+      .then((cache) => {
+        console.log('Service Worker: Caching files');
         return cache.addAll(urlsToCache);
+      })
+      .then(() => {
+        console.log('Service Worker: Installed successfully');
+        return self.skipWaiting(); // Activate immediately
       })
   );
 });
 
-// Activate event
-self.addEventListener('activate', event => {
+// Activate event - clean up old caches
+self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    caches.keys()
+      .then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cacheName) => {
+            if (cacheName !== CACHE_NAME) {
+              console.log('Service Worker: Clearing old cache', cacheName);
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      })
+      .then(() => {
+        console.log('Service Worker: Activated successfully');
+        return self.clients.claim(); // Take control of all clients
+      })
   );
 });
 
-// Fetch event
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Return cached version or fetch from network
-        if (response) {
+// Fetch event - serve from cache, fallback to network
+self.addEventListener('fetch', (event) => {
+  const { request } = event;
+  const url = new URL(request.url);
+
+  // Skip cross-origin requests
+  if (url.origin !== location.origin) {
+    return;
+  }
+
+  // API requests - network first, cache as fallback
+  if (request.url.includes('/api/')) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          // Cache successful API responses for portfolio data
+          if (request.url.includes('/api/portfolio') && response.ok) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(request, responseClone);
+            });
+          }
           return response;
+        })
+        .catch(() => {
+          // Fallback to cache for portfolio data
+          if (request.url.includes('/api/portfolio')) {
+            return caches.match(request);
+          }
+          // For other API requests, return a custom offline response
+          return new Response(JSON.stringify({ 
+            error: 'Offline', 
+            message: 'Please check your internet connection' 
+          }), {
+            headers: { 'Content-Type': 'application/json' }
+          });
+        })
+    );
+    return;
+  }
+
+  // Static assets - cache first, fallback to network
+  event.respondWith(
+    caches.match(request)
+      .then((cachedResponse) => {
+        if (cachedResponse) {
+          return cachedResponse;
         }
         
-        return fetch(event.request).then(response => {
-          // Check if we received a valid response
+        return fetch(request).then((response) => {
+          // Don't cache if not a valid response
           if (!response || response.status !== 200 || response.type !== 'basic') {
             return response;
           }
 
-          // Clone the response
+          // Cache the response
           const responseToCache = response.clone();
-
-          caches.open(DYNAMIC_CACHE)
-            .then(cache => {
-              cache.put(event.request, responseToCache);
+          caches.open(CACHE_NAME)
+            .then((cache) => {
+              cache.put(request, responseToCache);
             });
 
           return response;
         });
-      }
-    )
+      })
+      .catch(() => {
+        // Fallback for offline navigation
+        if (request.destination === 'document') {
+          return caches.match('/');
+        }
+        
+        // Fallback for images
+        if (request.destination === 'image') {
+          return new Response('', { status: 204 });
+        }
+      })
   );
 });
 
-// Background sync for contact form
-self.addEventListener('sync', event => {
+// Background sync for contact form (if supported)
+self.addEventListener('sync', (event) => {
   if (event.tag === 'contact-form-sync') {
     event.waitUntil(syncContactForm());
   }
 });
 
 async function syncContactForm() {
-  // Handle offline contact form submissions
-  const forms = await getStoredForms();
-  for (const form of forms) {
-    try {
-      await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(form)
-      });
-      await removeStoredForm(form.id);
-    } catch (error) {
-      console.error('Failed to sync form:', error);
-    }
+  try {
+    // Get pending contact forms from IndexedDB (would need to implement)
+    console.log('Service Worker: Syncing contact forms...');
+    // Implementation would sync offline form submissions
+  } catch (error) {
+    console.error('Service Worker: Sync failed', error);
   }
 }
 
-async function getStoredForms() {
-  // Implementation would read from IndexedDB
-  return [];
-}
+// Push notifications (optional)
+self.addEventListener('push', (event) => {
+  const options = {
+    body: event.data ? event.data.text() : 'New update available!',
+    icon: '/icon-192x192.png',
+    badge: '/badge-72x72.png',
+    tag: 'portfolio-update'
+  };
 
-async function removeStoredForm(id) {
-  // Implementation would remove from IndexedDB
-}
+  event.waitUntil(
+    self.registration.showNotification('Portfolio Update', options)
+  );
+});
+
+// Handle notification clicks
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  event.waitUntil(
+    clients.openWindow('/')
+  );
+});
