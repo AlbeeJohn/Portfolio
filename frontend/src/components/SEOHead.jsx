@@ -2,9 +2,9 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SEOHead = ({ 
-  title = "Albee John - Data Analysis & Science Enthusiast | Portfolio",
-  description = "Albee John - Data Analysis & Science Enthusiast passionate about transforming raw data into actionable insights through advanced analytics, machine learning, and data-driven decision making. Expertise in Python, R, SQL, Statistical Analysis, and Data Visualization.",
-  keywords = "Albee John, Data Analysis, Science Enthusiast, Data Scientist, Python Developer, R Programming, SQL Expert, Machine Learning, Statistical Analysis, Data Visualization, Analytics Professional, Kerala Data Scientist, Portfolio, Data Science Projects, MERN Stack",
+  title = "Albee John - Data Analyst & Science Enthusiast | Portfolio",
+  description = "Albee John - Data Analyst & Science Enthusiast passionate about transforming raw data into actionable insights through advanced analytics, data analysis, and data-driven decision making. Expertise in Python, R, SQL, Statistical Analysis, and Data Visualization.",
+  keywords = "Albee John, Data Analyst, Science Enthusiast, Data Analysis, Python Developer, R Programming, SQL Expert, Statistical Analysis, Data Visualization, Business Intelligence, Analytics Professional, Kerala Data Analyst, Portfolio, Data Analysis Projects, Business Analytics",
   url = "https://albeejohn.com",
   image = "https://albeejohn.com/og-image.jpg",
   type = "website"
@@ -13,8 +13,8 @@ const SEOHead = ({
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Albee John",
-    "jobTitle": "Data Analysis & Science Enthusiast",
-    "description": "Passionate about transforming raw data into actionable insights through advanced analytics, machine learning, and data-driven decision making. Currently pursuing expertise in Data Science and advanced analytics.",
+    "jobTitle": "Data Analyst & Science Enthusiast",
+    "description": "Passionate about transforming raw data into actionable insights through advanced analytics, data analysis, and data-driven decision making. Currently pursuing expertise in Data Analysis and advanced analytics.",
     "url": url,
     "image": image,
     "sameAs": [
