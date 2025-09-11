@@ -23,13 +23,21 @@ const SEOHead = ({
     ],
     "knowsAbout": [
       "Data Science",
+      "Data Analysis", 
       "Python Programming",
       "R Programming", 
       "Machine Learning",
+      "Deep Learning",
       "Statistical Analysis",
       "Data Visualization",
       "MongoDB",
-      "SQL"
+      "SQL",
+      "NumPy",
+      "Pandas", 
+      "Scikit-learn",
+      "TensorFlow",
+      "Tableau",
+      "Power BI"
     ],
     "alumniOf": {
       "@type": "EducationalOrganization",
