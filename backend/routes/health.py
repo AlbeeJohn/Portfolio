@@ -10,11 +10,12 @@ logger = logging.getLogger(__name__)
 
 @router.get("/health")
 async def health_check():
-    """Basic health check endpoint"""
+    """Basic health check endpoint for Railway"""
     return {
         "status": "healthy",
-        "timestamp": datetime.utcnow(),
-        "service": "portfolio-api"
+        "timestamp": datetime.utcnow().isoformat(),
+        "service": "portfolio-api",
+        "version": "1.0.0"
     }
 
 @router.get("/health/detailed")
