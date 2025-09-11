@@ -7,6 +7,7 @@ import Experience from './Experience';
 import Projects from './Projects';
 import Contact from './Contact';
 import Footer from './Footer';
+import SEOHead from './SEOHead';
 import { InteractiveBackground, FloatingElements, injectFloatingStyles } from './InteractiveBackground';
 import axios from 'axios';
 
