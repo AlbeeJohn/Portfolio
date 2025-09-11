@@ -2,9 +2,9 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SEOHead = ({ 
-  title = "Albee John - Data Scientist & Analytics Professional",
-  description = "Professional Data Science portfolio showcasing expertise in Python, R, Machine Learning, Statistical Analysis, and Data Visualization. Available for data science opportunities.",
-  keywords = "Data Scientist, Analytics Professional, Python, R Programming, Machine Learning, Statistical Analysis, Data Visualization, Portfolio, Albee John",
+  title = "Albee John - Data Analysis & Science Enthusiast | Portfolio",
+  description = "Albee John - Data Analysis & Science Enthusiast passionate about transforming raw data into actionable insights through advanced analytics, machine learning, and data-driven decision making. Expertise in Python, R, SQL, Statistical Analysis, and Data Visualization.",
+  keywords = "Albee John, Data Analysis, Science Enthusiast, Data Scientist, Python Developer, R Programming, SQL Expert, Machine Learning, Statistical Analysis, Data Visualization, Analytics Professional, Kerala Data Scientist, Portfolio, Data Science Projects, MERN Stack",
   url = "https://albeejohn.com",
   image = "https://albeejohn.com/og-image.jpg",
   type = "website"
@@ -13,7 +13,7 @@ const SEOHead = ({
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Albee John",
-    "jobTitle": "Data Scientist & Analytics Professional",
+    "jobTitle": "Data Analysis & Science Enthusiast",
     "description": "Aspiring data scientist with expertise in Python, R, Machine Learning, and Statistical Analysis",
     "url": url,
     "image": image,
