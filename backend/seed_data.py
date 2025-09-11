@@ -63,14 +63,14 @@ async def seed_portfolio_data():
                 Skill(name="Python", level=90, category="Programming"),
                 Skill(name="R Programming", level=75, category="Programming"),
                 Skill(name="SQL", level=85, category="Programming"),
-                Skill(name="Data Science", level=85, category="Analytics"),
-                Skill(name="Statistical Analysis", level=80, category="Analytics"),
-                Skill(name="Machine Learning", level=80, category="AI/ML"),
-                Skill(name="Deep Learning", level=75, category="AI/ML"),
-                Skill(name="Data Visualization", level=85, category="Analytics")
+                Skill(name="Data Analysis", level=90, category="Analytics"),
+                Skill(name="Statistical Analysis", level=85, category="Analytics"),
+                Skill(name="Data Visualization", level=85, category="Analytics"),
+                Skill(name="Business Intelligence", level=80, category="Analytics"),
+                Skill(name="Data Modeling", level=80, category="Analytics")
             ],
-            tools=["NumPy", "Matplotlib", "Seaborn", "Pandas", "Scikit-learn", "TensorFlow", "Jupyter", "Tableau", "Power BI"],
-            soft=["Effective Communication", "Teamwork", "Time Management", "Data Management", "Problem Solving", "Critical Thinking", "Statistical Reasoning"]
+            tools=["NumPy", "Matplotlib", "Seaborn", "Pandas", "Excel", "Jupyter", "Tableau", "Power BI", "Google Analytics"],
+            soft=["Effective Communication", "Teamwork", "Time Management", "Data Management", "Problem Solving", "Critical Thinking", "Statistical Reasoning", "Business Acumen"]
         ),
         experience=[
             Experience(
