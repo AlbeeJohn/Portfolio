@@ -12,7 +12,7 @@ import xml.etree.ElementTree as ET
 from urllib.parse import urljoin
 
 # Get backend URL from environment
-BACKEND_URL = "https://responsive-ready.preview.emergentagent.com"
+BACKEND_URL = "https://portfolio-live-3.preview.emergentagent.com"
 API_URL = f"{BACKEND_URL}/api"
 
 class SEOBackendTester:
