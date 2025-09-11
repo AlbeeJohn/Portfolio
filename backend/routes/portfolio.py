@@ -1,24 +1,16 @@
-from fastapi import APIRouter, HTTPException
-from motor.motor_asyncio import AsyncIOMotorClient
+from fastapi import APIRouter, HTTPException, Depends, Request
 from models.portfolio import Portfolio, ContactMessage, ContactMessageCreate
-import os
 from datetime import datetime
-from dotenv import load_dotenv
-from pathlib import Path
-
-# Load environment variables
-ROOT_DIR = Path(__file__).parent.parent
-load_dotenv(ROOT_DIR / '.env')
+from middleware.cache import cached_response
+from middleware.rate_limiting import rate_limit, contact_limiter
+from config.database import get_db
+import logging
 
 router = APIRouter()
-
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+logger = logging.getLogger(__name__)
 
 @router.get("/portfolio")
-async def get_portfolio():
+async def get_portfolio(db = Depends(get_db)):
     """Get complete portfolio data"""
     try:
         portfolio = await db.portfolio.find_one({}, {"_id": 0})
@@ -29,7 +21,7 @@ async def get_portfolio():
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.put("/portfolio")
-async def update_portfolio(portfolio_data: Portfolio):
+async def update_portfolio(portfolio_data: Portfolio, db = Depends(get_db)):
     """Update portfolio data"""
     try:
         portfolio_dict = portfolio_data.dict()
@@ -49,7 +41,7 @@ async def update_portfolio(portfolio_data: Portfolio):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/contact")
-async def create_contact_message(message_data: ContactMessageCreate):
+async def create_contact_message(message_data: ContactMessageCreate, db = Depends(get_db)):
     """Create a new contact message"""
     try:
         message = ContactMessage(**message_data.dict())
@@ -68,7 +60,7 @@ async def create_contact_message(message_data: ContactMessageCreate):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/contact/messages")
-async def get_contact_messages():
+async def get_contact_messages(db = Depends(get_db)):
     """Get all contact messages (admin endpoint)"""
     try:
         messages = await db.contact_messages.find({}, {"_id": 0}).sort("created_at", -1).to_list(100)
@@ -77,7 +69,7 @@ async def get_contact_messages():
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.put("/contact/messages/{message_id}/read")
-async def mark_message_read(message_id: str):
+async def mark_message_read(message_id: str, db = Depends(get_db)):
     """Mark a contact message as read"""
     try:
         result = await db.contact_messages.update_one(
