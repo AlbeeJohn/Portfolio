@@ -47,8 +47,9 @@ async def update_portfolio(portfolio_data: Portfolio, db = Depends(get_db)):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/contact")
-async def create_contact_message(message_data: ContactMessageCreate, db = Depends(get_db)):
-    """Create a new contact message"""
+@rate_limit(limiter=contact_limiter)  # Stricter rate limit for contact form
+async def create_contact_message(message_data: ContactMessageCreate, request: Request, db = Depends(get_db)):
+    """Create a new contact message with rate limiting"""
     try:
         message = ContactMessage(**message_data.dict())
         message_dict = message.dict()
@@ -58,11 +59,15 @@ async def create_contact_message(message_data: ContactMessageCreate, db = Depend
         if not result.inserted_id:
             raise HTTPException(status_code=400, detail="Failed to save message")
         
+        logger.info(f"New contact message created: {message.id}")
         return {
             "message": "Message sent successfully",
             "id": message.id
         }
+    except HTTPException:
+        raise
     except Exception as e:
+        logger.error(f"Error creating contact message: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/contact/messages")
