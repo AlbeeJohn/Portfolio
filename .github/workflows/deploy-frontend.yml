@@ -8,6 +8,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     
     steps:
     - name: Checkout code
@@ -18,21 +22,34 @@ jobs:
       with:
         node-version: '18'
         
-    - name: Install dependencies
+    - name: Check for yarn.lock and install dependencies
       run: |
         cd frontend
-        npm ci
+        if [ -f "yarn.lock" ]; then
+          echo "Using Yarn"
+          npm install -g yarn
+          yarn install --frozen-lockfile
+        else
+          echo "Using npm"
+          npm ci
+        fi
         
     - name: Build project
       run: |
         cd frontend
-        REACT_APP_BACKEND_URL=https://placeholder-backend-url.herokuapp.com npm run build
+        if [ -f "yarn.lock" ]; then
+          REACT_APP_BACKEND_URL=https://albeejohn-portfolio-backend.up.railway.app yarn build
+        else
+          REACT_APP_BACKEND_URL=https://albeejohn-portfolio-backend.up.railway.app npm run build
+        fi
       env:
         CI: false
         
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
-      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    - name: Upload to GitHub Pages
+      uses: actions/upload-pages-artifact@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./frontend/build
+        path: ./frontend/build
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
