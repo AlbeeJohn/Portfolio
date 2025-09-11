@@ -56,7 +56,7 @@ class StatusCheckCreate(BaseModel):
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
-    return {"message": "Albee John Portfolio API - Data Science Professional"}
+    return {"message": "Albee John Portfolio API - Data Analyst & Science Enthusiast"}
 
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate, db = Depends(get_db)):
