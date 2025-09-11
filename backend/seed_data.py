@@ -109,11 +109,11 @@ async def seed_portfolio_data():
         ],
         certifications=[
             Certification(
-                name="Data Science With Python And Machine Learning",
+                name="Data Analysis With Python And Advanced Analytics",
                 issuer="Soften Technologies",
                 period="Aug 2024 - Mar 2025",
                 type="Virtual",
-                description="Comprehensive coursework in Data Science using Python, integrating Machine Learning algorithms and AI applications, utilizing libraries such as NumPy, Matplotlib, Seaborn and more."
+                description="Comprehensive coursework in Data Analysis using Python, integrating advanced analytics techniques and business intelligence applications, utilizing libraries such as NumPy, Matplotlib, Seaborn and more."
             )
         ],
         contact=Contact(
