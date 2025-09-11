@@ -22,22 +22,22 @@ const SEOHead = ({
       "https://github.com/albeejohn"
     ],
     "knowsAbout": [
-      "Data Science",
-      "Data Analysis", 
+      "Data Analysis",
+      "Business Analytics", 
       "Python Programming",
       "R Programming", 
-      "Machine Learning",
-      "Deep Learning",
       "Statistical Analysis",
       "Data Visualization",
+      "Business Intelligence",
+      "Data Modeling",
       "MongoDB",
       "SQL",
       "NumPy",
       "Pandas", 
-      "Scikit-learn",
-      "TensorFlow",
+      "Excel",
       "Tableau",
-      "Power BI"
+      "Power BI",
+      "Google Analytics"
     ],
     "alumniOf": {
       "@type": "EducationalOrganization",
