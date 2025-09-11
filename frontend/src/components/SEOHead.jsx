@@ -86,6 +86,32 @@ const SEOHead = ({
       <meta name="theme-color" content="#1f2937" />
       <meta name="msapplication-TileColor" content="#1f2937" />
       <meta name="application-name" content="Albee John Portfolio" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="subject" content="Data Analysis & Science Enthusiast Portfolio" />
+      <meta name="rating" content="general" />
+      <meta name="referrer" content="no-referrer-when-downgrade" />
+      
+      {/* Geographic Tags */}
+      <meta name="geo.region" content="IN-KL" />
+      <meta name="geo.placename" content="Kollam, Kerala" />
+      <meta name="geo.position" content="8.8932;76.6141" />
+      <meta name="ICBM" content="8.8932, 76.6141" />
+      
+      {/* Language Tags */}
+      <meta name="language" content="English" />
+      <meta httpEquiv="content-language" content="en-us" />
+      
+      {/* Cache Control */}
+      <meta name="revisit-after" content="7 days" />
+      <meta name="expires" content="never" />
+      <meta name="distribution" content="web" />
+      <meta name="target" content="all" />
+      <meta name="audience" content="all" />
+      <meta name="resource-type" content="document" />
+      <meta name="classification" content="business" />
       
       {/* Structured Data */}
       <script type="application/ld+json">
