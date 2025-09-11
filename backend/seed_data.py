@@ -128,9 +128,9 @@ async def seed_portfolio_data():
             }
         ),
         activities=[
-            "IEEE Society Member - Active college member focusing on engineering innovation and networking",
-            "Continuous learner in emerging technologies and industry trends",
-            "Regular participant in tech meetups and coding communities"
+            "IEEE Society Member - Active college member focusing on engineering innovation and data analysis networking",
+            "Continuous learner in emerging data analytics technologies and industry trends",
+            "Regular participant in data analysis meetups and analytics communities"
         ]
     )
     
